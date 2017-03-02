@@ -1,27 +1,28 @@
 {
-	"ImportPath": "github.com/narqo/go-badge",
-	"GoVersion": "go1.6",
+	"ImportPath": "github.com/the42/badge",
+	"GoVersion": "go1.8",
+	"GodepVersion": "v79",
 	"Packages": [
 		"./..."
 	],
 	"Deps": [
 		{
 			"ImportPath": "github.com/golang/freetype/raster",
-			"Comment": "release-127-g9ce4eec",
-			"Rev": "9ce4eec92a4b5e260b4622c873355647ecf68304"
+			"Comment": "release-132-gd9be45a",
+			"Rev": "d9be45aaf7452cc30c0ceb1b1bf7efe1d17b7c87"
 		},
 		{
 			"ImportPath": "github.com/golang/freetype/truetype",
-			"Comment": "release-127-g9ce4eec",
-			"Rev": "9ce4eec92a4b5e260b4622c873355647ecf68304"
+			"Comment": "release-132-gd9be45a",
+			"Rev": "d9be45aaf7452cc30c0ceb1b1bf7efe1d17b7c87"
 		},
 		{
 			"ImportPath": "golang.org/x/image/font",
-			"Rev": "7c492694a6443a92fd349fda0c4c7b587040f161"
+			"Rev": "e6cbe778da3cea914ea6436d0f99309605c3dfc4"
 		},
 		{
 			"ImportPath": "golang.org/x/image/math/fixed",
-			"Rev": "7c492694a6443a92fd349fda0c4c7b587040f161"
+			"Rev": "e6cbe778da3cea914ea6436d0f99309605c3dfc4"
 		}
 	]
 }
