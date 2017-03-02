@@ -5,13 +5,13 @@ import (
 	"log"
 	"os"
 
-	"github.com/narqo/go-badge"
+	"github.com/the42/badge"
 )
 
 var (
 	subject = flag.String("subject", "", "Badge subject")
-	status = flag.String("status", "", "Badge status")
-	color = flag.String("color", "blue", "Badge color")
+	status  = flag.String("status", "", "Badge status")
+	color   = flag.String("color", "blue", "Badge color")
 )
 
 func main() {
