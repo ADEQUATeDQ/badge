@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"net/url"
@@ -24,7 +25,9 @@ func portalwatch(w http.ResponseWriter, r *http.Request) {
 
 		// host := r.Host
 		if err := r.ParseForm(); err != nil {
-			log.Printf("Error parsing form: %s", err)
+			s := fmt.Sprintf("Error parsing form: %s", err)
+			log.Printf(s)
+			http.Error(w, s, http.StatusInternalServerError)
 			return
 		}
 
@@ -33,7 +36,9 @@ func portalwatch(w http.ResponseWriter, r *http.Request) {
 		parameters := strings.Split(r.URL.Path[len(basepath):], "/")
 
 		if len(parameters) < 2 {
-			log.Printf("Not enough parameters in call to " + basepath + " badge service")
+			s := fmt.Sprintf("Not enough parameters in call to %s badge service", basepath)
+			log.Printf(s)
+			http.Error(w, s, http.StatusInternalServerError)
 			return
 		}
 		portal := parameters[0]
@@ -48,16 +53,24 @@ func portalwatch(w http.ResponseWriter, r *http.Request) {
 
 			// perform the Portalwatch quality check call. For now, the result interpretation is very easy.
 			// If a HTTP-code of 200 is returned, we assume a quality check has been performed and render a badge
-			resp, err := http.Get(portalwatchpath.String())
-			_ = resp
+			resp, err := http.Head(portalwatchpath.String())
 
 			if err != nil {
-				log.Printf("%s", err.Error())
+				s := err.Error()
+				log.Printf(s)
+				http.Error(w, s, http.StatusInternalServerError)
 				return
-			} else if resp.StatusCode == http.StatusOK {
+			}
+
+			switch resp.StatusCode {
+			case http.StatusOK:
 				w.Header().Set("Content-Type", "image/svg+xml")
 				badge.Render("ADEQUATe", "Checked "+"\xE2\x9C\x94", "brightgreen", w)
+			default:
+				w.WriteHeader(http.StatusNotFound)
 			}
+		} else {
+			w.WriteHeader(http.StatusNotFound)
 		}
 	}
 }
