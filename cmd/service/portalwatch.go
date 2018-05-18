@@ -11,7 +11,7 @@ import (
 	"github.com/the42/badge"
 )
 
-var PortalwatchDSBaseUrl = "http://tools.adequate.at/portalmonitor/api/memento/"
+var PortalwatchDSBaseUrl = "https://tools.adequate.at/portalmonitor/api/memento/"
 
 func portalwatch(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
