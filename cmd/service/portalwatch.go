@@ -4,14 +4,12 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"net/url"
-	"path"
 	"strings"
 
 	"github.com/the42/badge"
 )
 
-var PortalwatchDSBaseUrl = "https://tools.adequate.at/portalmonitor/api/memento/"
+var AdequateGit = "https://data.adequate.at/api/v4/projects/"
 
 func portalwatch(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
@@ -46,14 +44,11 @@ func portalwatch(w http.ResponseWriter, r *http.Request) {
 
 		// do not serve a badge if there is no indication for what ID or portal to retrieve information
 		if len(id) > 0 && len(portal) > 0 {
-			portalwatchpath, _ := url.Parse(PortalwatchDSBaseUrl)
-			portalwatchpath.Path = path.Join(portalwatchpath.Path, portal)
-			portalwatchpath.Path = path.Join(portalwatchpath.Path, id)
-			portalwatchpath.Path = path.Join(portalwatchpath.Path, "dqv")
+			p := AdequateGit + portal + "%2F" + id
 
 			// perform the Portalwatch quality check call. For now, the result interpretation is very easy.
 			// If a HTTP-code of 200 is returned, we assume a quality check has been performed and render a badge
-			resp, err := http.Head(portalwatchpath.String())
+			resp, err := http.Head(p)
 
 			if err != nil {
 				s := err.Error()
