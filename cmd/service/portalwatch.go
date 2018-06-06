@@ -44,7 +44,7 @@ func portalwatch(w http.ResponseWriter, r *http.Request) {
 
 		// do not serve a badge if there is no indication for what ID or portal to retrieve information
 		if len(id) > 0 && len(portal) > 0 {
-			p := AdequateGit + portal + "%2F" + id
+			p := AdequateGit + portal + "%2F" + id + "/repository/files/metadata.jsonld?ref=master"
 
 			// perform the Portalwatch quality check call. For now, the result interpretation is very easy.
 			// If a HTTP-code of 200 is returned, we assume a quality check has been performed and render a badge
